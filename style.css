@@ -1,0 +1,209 @@
+/* ============================================
+   BRICK BREAKER - HTML/CSS/JS Game
+   Retro arcade style
+   ============================================ */
+
+:root {
+  --bg-dark: #0a0a12;
+  --bg-game: #12121a;
+  --neon-cyan: #00f5ff;
+  --neon-magenta: #ff00aa;
+  --neon-yellow: #ffdd00;
+  --neon-green: #39ff14;
+  --game-width: 400px;
+  --game-height: 500px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-dark);
+  font-family: 'Courier New', monospace;
+  color: var(--neon-cyan);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  max-width: 100vw;
+}
+
+/* ========== HEADER / STATS ========== */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: var(--game-width);
+  max-width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  opacity: 0.8;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.stat-score .stat-value { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+.stat-level .stat-value { color: var(--neon-cyan); }
+.stat-lives .stat-value { color: var(--neon-magenta); text-shadow: 0 0 10px var(--neon-magenta); }
+
+/* ========== GAME CONTAINER ========== */
+.game-container {
+  position: relative;
+  width: var(--game-width);
+  height: var(--game-height);
+  max-width: 100%;
+  background: var(--bg-game);
+  border: 4px solid var(--neon-cyan);
+  border-radius: 8px;
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.3),
+    inset 0 0 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: none;
+  outline: none;
+}
+
+#gameCanvas:focus {
+  outline: none;
+}
+
+/* ========== OVERLAY (Start / Game Over / Win) ========== */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 18, 0.92);
+  gap: 1.5rem;
+}
+
+.game-overlay.hidden {
+  display: none;
+}
+
+.overlay-message {
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 6px;
+  text-shadow: 0 0 20px var(--neon-cyan);
+  text-align: center;
+}
+
+.btn-overlay {
+  padding: 0.75rem 2rem;
+  background: transparent;
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-overlay:hover {
+  background: var(--neon-cyan);
+  color: var(--bg-dark);
+  box-shadow: 0 0 25px var(--neon-cyan);
+}
+
+/* ========== CONTROLS ========== */
+.controls-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  width: var(--game-width);
+  max-width: 100%;
+}
+
+.btn-restart {
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: 2px solid var(--neon-green);
+  color: var(--neon-green);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-restart:hover {
+  background: var(--neon-green);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px var(--neon-green);
+}
+
+.controls-hint {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* ========== FOOTER ========== */
+.game-footer {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 440px) {
+  :root {
+    --game-width: 100%;
+    --game-height: 480px;
+  }
+
+  .game-container {
+    max-height: 70vh;
+  }
+
+  #gameCanvas {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 400 / 500;
+  }
+
+  .overlay-message {
+    font-size: 1.5rem;
+  }
+}
