@@ -7,7 +7,56 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="game-wrapper">
+  <div class="app">
+    <section id="homeScreen" class="home-screen">
+      <header class="home-header">
+        <p class="home-kicker">RETRO ARCADE</p>
+        <h1 class="home-title">BRICKED UP </h1>
+        <p class="home-subtitle">Crack the core, dodge the mines, chase the streak.</p>
+      </header>
+
+      <div class="home-panels">
+        <div class="panel panel-levels">
+          <div class="panel-header">
+            <h2>LEVELS</h2>
+            <span id="progressSummary" class="panel-meta">0 / 0 COMPLETE</span>
+          </div>
+          <div id="levelGrid" class="level-grid"></div>
+        </div>
+
+        <div class="panel panel-settings">
+          <div class="panel-header">
+            <h2>SETTINGS</h2>
+            <span class="panel-meta">DIFFICULTY</span>
+          </div>
+          <div class="difficulty-group" role="radiogroup" aria-label="Difficulty">
+            <button class="difficulty-btn" data-difficulty="easy" aria-pressed="false">EASY</button>
+            <button class="difficulty-btn" data-difficulty="medium" aria-pressed="true">MEDIUM</button>
+            <button class="difficulty-btn" data-difficulty="hard" aria-pressed="false">HARD</button>
+          </div>
+          <div class="settings-row">
+            <span class="settings-label">SOUND</span>
+            <button id="homeSoundBtn" class="btn-sound" aria-pressed="false">SOUND: OFF</button>
+          </div>
+          <div class="settings-row">
+            <span class="settings-label">HELP</span>
+            <p class="settings-help">Arrows or touch to move. Space to launch.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-actions">
+        <button id="startBtn" class="btn-primary">START GAME</button>
+        <button id="settingsBtn" class="btn-ghost">SETTINGS</button>
+        <button id="exitBtn" class="btn-ghost">EXIT</button>
+      </div>
+
+      <footer class="home-footer">
+        <p>Retro Arcade</p>
+      </footer>
+    </section>
+
+    <div id="gameScreen" class="game-wrapper hidden">
     <header class="game-header">
       <div class="stat stat-score">
         <span class="stat-label">SCORE</span>
@@ -21,6 +70,14 @@
         <span class="stat-label">LIVES</span>
         <span id="lives" class="stat-value">3</span>
       </div>
+      <div class="stat stat-multi">
+        <span class="stat-label">MULTI</span>
+        <span id="multiplier" class="stat-value">1.0x</span>
+      </div>
+      <div class="stat stat-streak">
+        <span class="stat-label">STREAK</span>
+        <span id="streak" class="stat-value">0</span>
+      </div>
     </header>
 
     <main class="game-container">
@@ -29,16 +86,34 @@
         <div id="overlayMessage" class="overlay-message"></div>
         <button id="overlayButton" class="btn-overlay">START GAME</button>
       </div>
+      <div id="toast" class="toast hidden"></div>
     </main>
+
+    <section class="objective-panel">
+      <div class="objective-row">
+        <span class="objective-label">OBJECTIVE</span>
+        <span id="objectiveText" class="objective-text">CLEAR ALL BRICKS</span>
+      </div>
+      <div class="progress-row">
+        <span id="bricksRemaining" class="progress-text">0 / 0</span>
+        <div class="progress-track">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+    </section>
 
     <div class="controls-row">
       <button id="restartBtn" class="btn-restart">RESTART GAME</button>
-      <p class="controls-hint">← → Arrow keys to move • Mouse also works</p>
+      <div class="controls-actions">
+        <button id="soundBtn" class="btn-sound" aria-pressed="false">SOUND: OFF</button>
+        <p class="controls-hint">LEFT / RIGHT arrows, mouse, or touch</p>
+      </div>
     </div>
 
     <footer class="game-footer">
-      <p>HTML + CSS + JavaScript • Retro Arcade</p>
+      <p>Retro Arcade</p>
     </footer>
+    </div>
   </div>
   <script src="game.js"></script>
 </body>
